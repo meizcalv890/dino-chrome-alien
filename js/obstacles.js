@@ -23,7 +23,7 @@ export class Obstacle {
 
     this.y =
       type === "flyer"
-        ? groundY - 83 - Math.random() * 20
+        ? groundY - 50 - Math.random() * 20
         : groundY - this.height;
   }
 
@@ -165,7 +165,7 @@ export class ObstacleSpawner {
   chooseType(elapsed) {
     const roll = Math.random();
 
-    if (elapsed > 15 && roll > 0.78) {
+    if (elapsed > 8 && roll > 0.72) {
       return "flyer";
     }
 
