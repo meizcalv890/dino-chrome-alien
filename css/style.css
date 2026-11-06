@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
-
 :root {
     --bg: #080d09;
     --surface: #101810;
@@ -342,8 +340,10 @@ button {
     border-radius: 50%;
 }
 
+/* TABLET & MOBILE */
 @media (max-width: 700px) {
     body {
+        min-height: 100vh;
         padding: 18px 10px;
         align-items: flex-start;
     }
@@ -353,11 +353,28 @@ button {
     }
 
     .brand {
+        gap: 8px;
         font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .brand-mark {
+        width: 30px;
+        height: 30px;
+    }
+
+    .topbar-right {
+        gap: 10px;
     }
 
     .edition {
         font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .icon-button {
+        width: 34px;
+        height: 34px;
     }
 
     .game-shell {
@@ -367,11 +384,31 @@ button {
     .game-topline,
     .game-bottomline {
         font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    /*
+       Beri ruang vertikal lebih besar untuk menu.
+       Canvas tetap mempertahankan rasio aslinya.
+    */
+    .game-frame {
+        height: clamp(320px, 58svh, 440px);
+        min-height: 320px;
+        aspect-ratio: auto;
+    }
+
+    #gameCanvas {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: auto;
+        transform: translateY(-50%);
     }
 
     .hud {
-        top: 8px;
-        right: 10px;
+        top: 10px;
+        right: 12px;
         gap: 13px;
     }
 
@@ -384,27 +421,55 @@ button {
     }
 
     .overlay {
-        padding: 8px;
+        padding: 14px 10px;
+        overflow-y: auto;
+        align-items: center;
     }
 
     .panel {
-        padding: 16px 14px;
+        width: min(100%, 450px);
+        padding: 20px 15px;
+    }
+
+    .eyebrow {
+        margin-bottom: 10px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .panel h1 {
+        font-size: clamp(27px, 8vw, 40px);
+    }
+
+    .subtitle {
+        font-size: 10px;
+        letter-spacing: 4px;
     }
 
     .panel-copy {
-        margin: 12px 0;
-        font-size: 9px;
+        margin: 13px 0;
+        font-size: 10px;
+        line-height: 1.7;
     }
 
     .primary-button,
     .secondary-button {
-        min-height: 37px;
-        font-size: 9px;
+        min-height: 42px;
+        font-size: 10px;
     }
 
     .small-note {
-        margin-top: 10px;
+        margin-top: 12px;
         font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .compact-panel {
+        width: min(100%, 390px);
+    }
+
+    .result-grid {
+        margin: 15px 0;
     }
 
     .mobile-controls {
@@ -414,21 +479,88 @@ button {
         margin-top: 12px;
     }
 
+    /*
+       Sembunyikan kontrol sentuh ketika overlay menu,
+       pause, atau game over sedang terbuka.
+    */
+    body:has(#menuOverlay:not(.hidden)) .mobile-controls,
+    body:has(#pauseOverlay:not(.hidden)) .mobile-controls,
+    body:has(#gameOverOverlay:not(.hidden)) .mobile-controls {
+        display: none;
+    }
+
+    .touch-button {
+        min-height: 52px;
+    }
+
     .footer {
         font-size: 7px;
+        letter-spacing: 0.7px;
     }
 }
 
+/* SMALL PHONES */
 @media (max-width: 390px) {
+    body {
+        padding: 14px 8px;
+    }
+
     .game-frame {
-        min-height: 140px;
+        height: clamp(320px, 58svh, 420px);
     }
 
     .game-topline {
         letter-spacing: 0.7px;
     }
 
+    .panel {
+        padding: 18px 12px;
+    }
+
+    .panel h1 {
+        font-size: 27px;
+    }
+
+    .panel-copy {
+        font-size: 9px;
+    }
+
     .footer {
         letter-spacing: 0.5px;
+    }
+}
+
+/* LANDSCAPE PHONES */
+@media (max-width: 700px) and (orientation: landscape) {
+    body {
+        padding: 8px 12px;
+    }
+
+    .topbar {
+        margin-bottom: 8px;
+    }
+
+    .game-frame {
+        height: 340px;
+    }
+
+    .panel {
+        padding: 12px 16px;
+    }
+
+    .panel-copy {
+        margin: 8px 0;
+    }
+
+    .eyebrow {
+        margin-bottom: 7px;
+    }
+
+    .small-note {
+        margin-top: 7px;
+    }
+
+    .footer {
+        margin-top: 12px;
     }
 }
